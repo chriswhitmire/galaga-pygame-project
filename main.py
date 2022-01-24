@@ -3,6 +3,8 @@
 ############
 import pygame
 
+from Player import Player
+
 ###########
 # Global vars
 ###########
@@ -19,6 +21,11 @@ WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # naming the game window
 pygame.display.set_caption("Galaga Pygame")
+
+# Loading image assets
+
+# Players
+PLAYER1 = Player(200, 200, 200, 200, 3, 10, )
 
 ############
 # Function definitions

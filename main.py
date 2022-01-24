@@ -22,10 +22,12 @@ WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 # naming the game window
 pygame.display.set_caption("Galaga Pygame")
 
-# Loading image assets
+#### Loading image assets
+# load the image for the background
+backgroundImg = pygame.image.load("Assets/space.png")
+# scale the yellow ship image
+backgroundImg = pygame.transform.scale(backgroundImg, (WINDOW.get_width(),WINDOW.get_height()))
 
-# Players
-PLAYER1 = Player(200, 200, 200, 200, 3, 10, )
 
 ############
 # Function definitions
@@ -39,6 +41,10 @@ def main():
 
     # boolean representing if the game should keep looping
     isRunning = True
+
+    # Player instantiation
+    PLAYER1 = Player(200, 200, 75, 75, 3, 10, pygame.image.load("Assets/spaceship_yellow.png"))
+    PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
 
     # game loop
@@ -54,6 +60,7 @@ def main():
             if event.type == pygame.QUIT:
                 isRunning = False
 
+        PLAYER1.display(WINDOW)
 
         # update display
         pygame.display.update()

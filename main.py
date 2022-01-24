@@ -16,6 +16,9 @@ HEIGHT = 700
 # set the max frame rate of the game
 FPS = 60
 
+# amt of padding around the edge of the window that the player cannot move past
+PADDING = 20
+
 # window object
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -60,6 +63,26 @@ def main():
             if event.type == pygame.QUIT:
                 isRunning = False
 
+        ###### key presses
+        # this gets a list of booleans showing which keys are currently pressed
+        keysPressed = pygame.key.get_pressed()
+
+        # if the 'w' key is pressed
+        if keysPressed[pygame.K_w] == True and PLAYER1.hitbox.top > PLAYER1.speed + PADDING:
+            PLAYER1.moveUp()
+
+        # if the 'a' key is pressed
+        if keysPressed[pygame.K_a] == True and PLAYER1.hitbox.left > PLAYER1.speed + PADDING:
+            PLAYER1.moveLeft()
+
+        # if the 's' key is pressed
+        if keysPressed[pygame.K_s] == True and PLAYER1.hitbox.bottom < WINDOW.get_height() - PLAYER1.speed- PADDING:
+            PLAYER1.moveDown()
+
+        # if the 'd' key is pressed
+        if keysPressed[pygame.K_d] == True and PLAYER1.hitbox.right < WINDOW.get_width() - PLAYER1.speed - PADDING:
+            PLAYER1.moveRight()
+        
         PLAYER1.display(WINDOW)
 
         # update display

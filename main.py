@@ -4,6 +4,7 @@
 import pygame
 
 from Player import Player
+from Bullet import Bullet
 
 ###########
 # Global vars
@@ -49,6 +50,9 @@ def main():
     PLAYER1 = Player(200, 200, 75, 75, 3, 10, pygame.image.load("Assets/spaceship_yellow.png"))
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
+    # Player bullets
+    playerBulletList = []
+
 
     # game loop
     while isRunning:
@@ -59,9 +63,15 @@ def main():
         # for all the game events
         for event in pygame.event.get():
             
-            # if user presses the x key
+            # if user presses the x key in corner of window
             if event.type == pygame.QUIT:
                 isRunning = False
+
+            # if spacebar is pressed, then add a bullet to the player's bullet list
+            if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        playerBulletList.append(Bullet(PLAYER1.hitbox.x + PLAYER1.hitbox.width/2, PLAYER1.hitbox.y, 5, 20, (255,255,0), True))
+
 
         ###### key presses
         # this gets a list of booleans showing which keys are currently pressed
@@ -82,27 +92,21 @@ def main():
         # if the 'd' key is pressed
         if keysPressed[pygame.K_d] == True and PLAYER1.hitbox.right < WINDOW.get_width() - PLAYER1.speed - PADDING:
             PLAYER1.moveRight()
+
         
+        # reset the background
+        WINDOW.fill((0,0,0))
+        
+        # display the player
         PLAYER1.display(WINDOW)
+
+        # move and display every player bullet
+        for bullet in playerBulletList:
+            bullet.display(WINDOW)
+            bullet.move()
 
         # update display
         pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

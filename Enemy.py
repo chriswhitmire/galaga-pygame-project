@@ -2,6 +2,8 @@ import pygame
 
 class Enemy:
 
+    color = (255,255,255)
+
     # Constructor
     def __init__(self, x_, y_, w_, h_, aSpeed, aWaypointList) -> None:
         """Constructor
@@ -16,6 +18,7 @@ class Enemy:
         """
         self.hitbox = pygame.rect.Rect(x_, y_, w_, h_)
         self.speed = aSpeed
+        
 
     def renderHitbox(self, aSurface):
         """Displays the hitbox of the game object
@@ -23,7 +26,7 @@ class Enemy:
         Args:
             aSurface (pygame surface object): surface to draw on
         """
-        pygame.draw.rect(aSurface, (255,255,255,10), self.hitbox, 1)
+        pygame.draw.rect(aSurface, self.color, self.hitbox, 1)
         
     
     

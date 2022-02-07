@@ -112,14 +112,21 @@ def main():
         for bullet in playerBulletList:
             bullet.display(WINDOW)
             bullet.move()
+
+            # TODO change this to work with list of enemies
+            # check if the bullet collides with the enemy- TEST
+            if enemy1.hitbox.colliderect(bullet.hitbox):
+                # change the enemy's color to red
+                enemy1.color = (255,0,0)
+                print("hit")
             
-            # only keep bullets that are still on the screen
-            if bullet.hitbox.y > -10:
+            # only keep bullets that are still on the screen AND
+            # if they did not collide with an enemy
+            elif bullet.hitbox.y > -10:
                 bulletsToKeep.append(bullet)
 
         # make the active bullets the same as the bullets still on screen
         playerBulletList = bulletsToKeep
-        print(len(playerBulletList))
 
         # update display
         pygame.display.update()

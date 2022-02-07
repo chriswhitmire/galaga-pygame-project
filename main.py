@@ -110,6 +110,7 @@ def main():
             if bullet.hitbox.y > -10:
                 bulletsToKeep.append(bullet)
 
+        # make the active bullets the same as the bullets still on screen
         playerBulletList = bulletsToKeep
         print(len(playerBulletList))
 

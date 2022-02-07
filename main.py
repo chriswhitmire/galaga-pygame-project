@@ -1,6 +1,7 @@
 ############
 # imports
 ############
+import py
 import pygame
 
 from Player import Player
@@ -52,7 +53,7 @@ def main():
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
     # Enemy instantiation TESTING
-    enemy1 = Enemy(100, 100, 100, 100, 10, [])
+    enemy1 = Enemy(100, 100, 100, 100, 10, [pygame.Vector2(100,100), pygame.Vector2(300, 100)])
 
     # Player bullets
     playerBulletList = []
@@ -106,6 +107,8 @@ def main():
 
         # display the enemy- TESTING
         enemy1.renderHitbox(WINDOW)
+        # update the position of the enemy
+        enemy1.updatePos()
 
         ### move and display every player bullet
         bulletsToKeep = []

@@ -100,15 +100,21 @@ def main():
         # display the player
         PLAYER1.display(WINDOW)
 
-        # move and display every player bullet
+        ### move and display every player bullet
+        bulletsToKeep = []
         for bullet in playerBulletList:
             bullet.display(WINDOW)
             bullet.move()
+            
+            # only keep bullets that are still on the screen
+            if bullet.hitbox.y > -10:
+                bulletsToKeep.append(bullet)
+
+        playerBulletList = bulletsToKeep
+        print(len(playerBulletList))
 
         # update display
         pygame.display.update()
-
-
 
 ########
 # run main

@@ -1,12 +1,14 @@
 ############
 # imports
 ############
+import wave
 import py
 import pygame
 
 from Player import Player
 from Bullet import Bullet
 from Enemy import Enemy
+from Wave import Wave
 
 ###########
 # Global vars
@@ -53,7 +55,11 @@ def main():
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
     # Enemy instantiation TESTING
-    enemy1 = Enemy(100, 100, 100, 100, 10, [pygame.Vector2(100,100), pygame.Vector2(300, 500), pygame.Vector2(500, 200)])
+    waypointList1 = [pygame.Vector2(100,100), pygame.Vector2(300, 500), pygame.Vector2(500, 200)]
+    enemy1 = Enemy(100, 100, 100, 100, 10, waypointList1)
+
+    # Wave instantiation TESTING
+    wave1 = Wave(20, 20, 5, 3, 1000, waypointList1)
 
     # Player bullets
     playerBulletList = []
@@ -106,9 +112,13 @@ def main():
         PLAYER1.display(WINDOW)
 
         # display the enemy- TESTING
-        enemy1.renderHitbox(WINDOW)
+        #enemy1.renderHitbox(WINDOW)
         # update the position of the enemy
-        enemy1.updatePos()
+        #enemy1.updatePos()
+
+        # Wave TESTING
+        wave1.spawn()
+        wave1.handleEnemies(WINDOW)
 
         ### move and display every player bullet
         bulletsToKeep = []
@@ -118,17 +128,20 @@ def main():
 
             # TODO change this to work with list of enemies
             # check if the bullet collides with the enemy- TEST
-            if enemy1.hitbox.colliderect(bullet.hitbox):
-                # change the enemy's color to red
-                enemy1.color = (255,0,0)
+            for enemy in wave1.enemyList:
+
+                if enemy.hitbox.colliderect(bullet.hitbox):
+                    # change the enemy's color to red
+                    enemy.color = (255,0,0)
             
-            # only keep bullets that are still on the screen AND
-            # if they did not collide with an enemy
-            elif bullet.hitbox.y > -10:
+            # only keep bullets that are still on the screen
+            if bullet.hitbox.y > -10:
                 bulletsToKeep.append(bullet)
 
         # make the active bullets the same as the bullets still on screen
         playerBulletList = bulletsToKeep
+
+        print(len(playerBulletList))
 
         # update display
         pygame.display.update()

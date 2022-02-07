@@ -19,10 +19,13 @@ class Enemy:
         # initialize vars
         self.hitbox = pygame.rect.Rect(x_, y_, w_, h_)
         self.speed = aSpeed
-        self.waypointList = aWaypointList
+        # make it a copy so the original list is not later changed
+        self.waypointList = aWaypointList.copy()
 
         # get the starting position
-        self.currentPos = self.waypointList[0]
+        startingX = self.waypointList[0].x
+        startingY = self.waypointList[0].y
+        self.currentPos = pygame.Vector2(startingX, startingY)
         # get the index of the target position
         self.waypointIndex = 1
         
@@ -36,7 +39,7 @@ class Enemy:
 
             # if you have not reached the current position yet
             # then move towards the target
-            if self.currentPos != targetPos:
+            if self.currentPos.distance_to(targetPos) >= self.speed:
                 # get the velocity
                 velocity = targetPos - self.currentPos
                 # normalize the velocity to get a unit vector
@@ -44,9 +47,9 @@ class Enemy:
                 # update the current position so that it moves towards the target
                 self.currentPos += (velocity*self.speed)
 
-                # if it is close enough to the target, then move on to the next target
-                if self.currentPos.distance_to(targetPos) <= self.speed:
-                    self.waypointIndex += 1
+            # if it is close enough to the target, then move on to the next target
+            else:
+                self.waypointIndex += 1
 
             # update the hitbox position to match currentPos
             self.hitbox.x = self.currentPos.x

@@ -1,8 +1,6 @@
 ############
 # imports
 ############
-import wave
-import py
 import pygame
 
 from Player import Player

@@ -28,22 +28,29 @@ class Enemy:
         
     def updatePos(self):
 
-        # get the target pos
-        targetPos = self.waypointList[self.waypointIndex]
+        # if you have not reached the last waypoint
+        if self.waypointIndex < len(self.waypointList):
+            
+            # get the target pos
+            targetPos = self.waypointList[self.waypointIndex]
 
-        # if you have not reached the current position yet
-        # then move towards the target
-        if self.currentPos != targetPos:
-            # get the velocity
-            velocity = targetPos - self.currentPos
-            # normalize the velocity to get a unit vector
-            velocity = velocity.normalize()
-            # update the current position so that it moves towards the target
-            self.currentPos += (velocity*self.speed)
+            # if you have not reached the current position yet
+            # then move towards the target
+            if self.currentPos != targetPos:
+                # get the velocity
+                velocity = targetPos - self.currentPos
+                # normalize the velocity to get a unit vector
+                velocity = velocity.normalize()
+                # update the current position so that it moves towards the target
+                self.currentPos += (velocity*self.speed)
 
-        # update the hitbox position to match currentPos
-        self.hitbox.x = self.currentPos.x
-        self.hitbox.y = self.currentPos.y
+                # if it is close enough to the target, then move on to the next target
+                if self.currentPos.distance_to(targetPos) <= self.speed:
+                    self.waypointIndex += 1
+
+            # update the hitbox position to match currentPos
+            self.hitbox.x = self.currentPos.x
+            self.hitbox.y = self.currentPos.y
     
     def renderHitbox(self, aSurface):
         """Displays the hitbox of the game object

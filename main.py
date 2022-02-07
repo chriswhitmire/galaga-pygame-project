@@ -53,7 +53,7 @@ def main():
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
     # Enemy instantiation TESTING
-    enemy1 = Enemy(100, 100, 100, 100, 10, [pygame.Vector2(100,100), pygame.Vector2(300, 100)])
+    enemy1 = Enemy(100, 100, 100, 100, 10, [pygame.Vector2(100,100), pygame.Vector2(300, 500), pygame.Vector2(500, 200)])
 
     # Player bullets
     playerBulletList = []

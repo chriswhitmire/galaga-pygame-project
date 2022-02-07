@@ -23,7 +23,7 @@ class Enemy:
         Args:
             aSurface (pygame surface object): surface to draw on
         """
-        pygame.draw.rect(aSurface, (255,0,0,20))
+        pygame.draw.rect(aSurface, (255,255,255,10), self.hitbox, 1)
         
     
     

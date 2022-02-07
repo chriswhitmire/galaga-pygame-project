@@ -5,6 +5,7 @@ import pygame
 
 from Player import Player
 from Bullet import Bullet
+from Enemy import Enemy
 
 ###########
 # Global vars
@@ -49,6 +50,9 @@ def main():
     # Player instantiation
     PLAYER1 = Player(200, 200, 75, 75, 3, 10, pygame.image.load("Assets/spaceship_yellow.png"))
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
+
+    # Enemy instantiation TESTING
+    enemy1 = Enemy(100, 100, 100, 100, 10, [])
 
     # Player bullets
     playerBulletList = []
@@ -99,6 +103,9 @@ def main():
         
         # display the player
         PLAYER1.display(WINDOW)
+
+        # display the enemy- TESTING
+        enemy1.renderHitbox(WINDOW)
 
         ### move and display every player bullet
         bulletsToKeep = []

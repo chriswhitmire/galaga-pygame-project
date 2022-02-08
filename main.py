@@ -5,8 +5,8 @@ import pygame
 
 from Player import Player
 from Bullet import Bullet
-from Enemy import Enemy
 from Wave import Wave
+from WaveGenerator import WaveGenerator
 
 ###########
 # Global vars
@@ -66,10 +66,18 @@ def main():
                      pygame.Vector2(700, 100), pygame.Vector2(700, 300),
                      pygame.Vector2(WIDTH/2,HEIGHT/4), pygame.Vector2(WIDTH/2,-100)]
 
+    listOfWaypointLists = []
+    listOfWaypointLists.append(waypointList1)
+    listOfWaypointLists.append(waypointList2)
+    listOfWaypointLists.append(waypointList3)
+
     # Wave instantiation TESTING
     waveZ = Wave(20, 20, 5, 3, 1000, waypointList1)
     waveSpike = Wave(20, 20, 5, 3, 1000, waypointList2)
     waveCircle = Wave(20, 20, 5, 3, 1000, waypointList3)
+
+    # Wave generator instantiation TESTING
+    waveGenerator1 = WaveGenerator(listOfWaypointLists, 5000 )
 
     # Player bullets
     playerBulletList = []
@@ -121,14 +129,17 @@ def main():
         # display the player
         PLAYER1.display(WINDOW)
 
-        # display the enemy- TESTING
-        #enemy1.renderHitbox(WINDOW)
-        # update the position of the enemy
-        #enemy1.updatePos()
-
         # Wave TESTING
-        wave1.spawn()
-        wave1.handleEnemies(WINDOW)
+        # wave1.spawn()
+        # wave1.handleEnemies(WINDOW)
+
+        # check if you should generate a new wave
+        waveGenerator1.makeWave()
+
+        # managing all the active waves
+        for wave in waveGenerator1.activeWaves:
+            wave.spawn()
+            wave.handleEnemies(WINDOW)
 
         ### move and display every player bullet
         bulletsToKeep = []
@@ -136,14 +147,14 @@ def main():
             bullet.display(WINDOW)
             bullet.move()
 
-            # TODO change this to work with list of enemies
-            # check if the bullet collides with the enemy- TEST
-            for enemy in wave1.enemyList:
+            for wave in waveGenerator1.activeWaves:
 
-                if enemy.hitbox.colliderect(bullet.hitbox):
-                    # change the enemy's color to red
-                    enemy.color = (255,0,0)
-            
+                for enemy in wave.enemyList:
+
+                    if enemy.hitbox.colliderect(bullet.hitbox):
+                        # change the enemy's color to red
+                        enemy.color = (255,0,0)
+                
             # only keep bullets that are still on the screen
             if bullet.hitbox.y > -10:
                 bulletsToKeep.append(bullet)

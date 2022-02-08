@@ -51,6 +51,8 @@ class WaveGenerator:
 
 
     def makeWave(self):
+        """Generates a new wave after some time has passed
+        """
         # the time since the last time "tick" was called
         dt = self.clock.tick() 
 
@@ -60,5 +62,26 @@ class WaveGenerator:
         if self.timeSinceLastGeneration > self.timeBetweenWaveGenerations:
             self.generateRandomPredefinedWave()
             self.timeSinceLastGeneration = 0
+
+            # make a random time to pass before the next wave spawns
+            self.timeBetweenWaveGenerations = random.randint(4000,12000)
+
+
+    def removeDeadWaves(self):
+        """Removes all waves that do not have any enemies left in them
+        """
+
+        # list of waves to keep active
+        wavesToKeep = []
+
+        # only keep the waves that still have active enemies in them
+        for wave in self.activeWaves:
+            if len(wave.enemyList) != 0 or (wave.numSpawnedEnemies < wave.numEnemies):
+                wavesToKeep.append(wave)
+
+        # only keep appropriate waves
+        self.activeWaves = wavesToKeep.copy()
+
+    
 
 

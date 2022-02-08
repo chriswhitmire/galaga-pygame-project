@@ -135,6 +135,8 @@ def main():
 
         # check if you should generate a new wave
         waveGenerator1.makeWave()
+        waveGenerator1.removeDeadWaves()
+        print(len(waveGenerator1.activeWaves))
 
         # managing all the active waves
         for wave in waveGenerator1.activeWaves:
@@ -161,8 +163,6 @@ def main():
 
         # make the active bullets the same as the bullets still on screen
         playerBulletList = bulletsToKeep
-
-        print(len(playerBulletList))
 
         # update display
         pygame.display.update()

@@ -1,3 +1,4 @@
+from genericpath import exists
 import pygame
 
 class Enemy:
@@ -28,6 +29,9 @@ class Enemy:
         self.currentPos = pygame.Vector2(startingX, startingY)
         # get the index of the target position
         self.waypointIndex = 1
+
+        # boolean representing if the bullet should exist
+        self.exists = True
         
     def updatePos(self):
 
@@ -54,6 +58,10 @@ class Enemy:
             # update the hitbox position to match currentPos
             self.hitbox.x = self.currentPos.x
             self.hitbox.y = self.currentPos.y
+
+        # if you have reached the last waypoint
+        else:
+            self.exists = False
     
     def renderHitbox(self, aSurface):
         """Displays the hitbox of the game object

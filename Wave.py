@@ -70,8 +70,19 @@ class Wave:
         Args:
             aSurface (pygame Surface object): surface to draw on
         """
+        # list storing the enemies to keep
+        enemiesToKeep = []
+        
+        # for every enemy
         for enemy in self.enemyList:
+            # render and move the enemy along the wavepoint system
             enemy.renderHitbox(aSurface)
             enemy.updatePos()
+
+            if enemy.exists:
+                enemiesToKeep.append(enemy)
+        
+        # only keep the enemies that should be kept
+        self.enemyList = enemiesToKeep.copy()
 
         

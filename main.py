@@ -129,10 +129,6 @@ def main():
         # display the player
         PLAYER1.display(WINDOW)
 
-        # Wave TESTING
-        # wave1.spawn()
-        # wave1.handleEnemies(WINDOW)
-
         # check if you should generate a new wave
         waveGenerator1.makeWave()
         waveGenerator1.removeDeadWaves()

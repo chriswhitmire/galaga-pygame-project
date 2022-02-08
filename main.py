@@ -52,12 +52,24 @@ def main():
     PLAYER1 = Player(200, 200, 75, 75, 3, 10, pygame.image.load("Assets/spaceship_yellow.png"))
     PLAYER1.image = pygame.transform.rotate(PLAYER1.image, 180)
 
-    # Enemy instantiation TESTING
-    waypointList1 = [pygame.Vector2(100,100), pygame.Vector2(300, 500), pygame.Vector2(500, 200)]
-    enemy1 = Enemy(100, 100, 100, 100, 10, waypointList1)
+    # waypointlist instantiation TESTING
+    waypointList1 = [pygame.Vector2(-100,100), pygame.Vector2(WIDTH-200,100),
+                     pygame.Vector2(200, 300), pygame.Vector2(WIDTH + 100, 300)]
+
+    waypointList2 = [pygame.Vector2(-100,100), pygame.Vector2(100,100),
+                     pygame.Vector2(300, 300), pygame.Vector2(500, 100),
+                     pygame.Vector2(700, 300), pygame.Vector2(900, 100),
+                     pygame.Vector2(1100, 300)]
+
+    waypointList3 = [pygame.Vector2(WIDTH/2,-100), pygame.Vector2(WIDTH/2,HEIGHT/4),
+                     pygame.Vector2(300, 300), pygame.Vector2(300, 100),
+                     pygame.Vector2(700, 100), pygame.Vector2(700, 300),
+                     pygame.Vector2(WIDTH/2,HEIGHT/4), pygame.Vector2(WIDTH/2,-100)]
 
     # Wave instantiation TESTING
-    wave1 = Wave(20, 20, 5, 3, 1000, waypointList1)
+    waveZ = Wave(20, 20, 5, 3, 1000, waypointList1)
+    waveSpike = Wave(20, 20, 5, 3, 1000, waypointList2)
+    waveCircle = Wave(20, 20, 5, 3, 1000, waypointList3)
 
     # Player bullets
     playerBulletList = []

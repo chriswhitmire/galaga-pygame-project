@@ -196,10 +196,12 @@ def main():
             bullet.display(WINDOW)
             bullet.move()
 
+            # for every wave
             for wave in waveGenerator1.activeWaves:
-
+                # for every enemy in each wave
                 for enemy in wave.enemyList:
 
+                    # check if the enemy is hit by a bullet
                     if enemy.hitbox.colliderect(bullet.hitbox):
                         # change the enemy's color to red
                         enemy.color = (255,0,0)

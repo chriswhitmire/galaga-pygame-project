@@ -19,13 +19,20 @@ class Bullet:
 
         self.hitbox = pygame.Rect(startX, startY, diameter, diameter)
 
-    def display(self, aSurface):
+    def display(self, aSurface, imageToShow):
         """displays the bullet
 
         Args:
             aSurface (pygame Surface): surface to draw the bullet on
+            imageToShow (pygame image): image to show at the bullet's location
         """
-        pygame.draw.circle(aSurface, self.color,(self.hitbox.x, self.hitbox.y), self.diameter)
+        # pygame.draw.circle(aSurface, self.color,(self.hitbox.x, self.hitbox.y), self.diameter)
+        # if it is a player bullet
+        if self.isMovingUp:
+            aSurface.blit(imageToShow, (self.hitbox.x - 7, self.hitbox.y))
+        # if it is an enemy bullet
+        else:
+            aSurface.blit(imageToShow, (self.hitbox.x - 7, self.hitbox.y - 45))
     
     def move(self):
         """moves the bullet

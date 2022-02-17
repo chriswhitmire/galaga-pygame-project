@@ -36,6 +36,10 @@ backgroundImg = pygame.image.load("Assets/space.png")
 # scale the yellow ship image
 backgroundImg = pygame.transform.scale(backgroundImg, (WINDOW.get_width(),WINDOW.get_height()))
 
+# player laser
+playerLaserImg = pygame.image.load("Assets/laserBlue16.png")
+enemyLaserImg = pygame.image.load("Assets/laserRed01.png")
+
 # sound stuff
 pygame.mixer.init()
 
@@ -177,7 +181,7 @@ def main():
         # for every enemy bullet, render it and check for collision
         enemyBulletsToKeep = []
         for enemyBullet in enemyBulletList:
-            enemyBullet.display(WINDOW)
+            enemyBullet.display(WINDOW, enemyLaserImg)
             enemyBullet.move()
 
             # if the enemy bullet hits the player
@@ -210,7 +214,7 @@ def main():
         ### move and display every player bullet
         bulletsToKeep = []
         for bullet in playerBulletList:
-            bullet.display(WINDOW)
+            bullet.display(WINDOW, playerLaserImg)
             bullet.move()
 
             # for every wave

@@ -1,5 +1,4 @@
 import pygame
-from pygame import color
 
 class Bullet:
     def __init__(self, startX, startY, diameter, speed, colorTuple, isMovingUp):

@@ -1,6 +1,8 @@
 ############
 # imports
 ############
+from random import random
+import random
 import pygame
 
 from Player import Player
@@ -82,6 +84,13 @@ def main():
     # Player bullets
     playerBulletList = []
 
+    # enemy shooting bullet vars
+    timeBetweenEnemyShots = random.randint(1000,3000)
+    timeSinceLastEnemyShot = 0
+    enemyShootClock = pygame.time.Clock()
+
+    # enemy bullet vars
+    enemyBulletList = []
 
     # game loop
     while isRunning:
@@ -122,6 +131,31 @@ def main():
         if keysPressed[pygame.K_d] == True and PLAYER1.hitbox.right < WINDOW.get_width() - PLAYER1.speed - PADDING:
             PLAYER1.moveRight()
 
+        # timer to keep track of when enemy should shoot a bullet
+        enemyShotDT = enemyShootClock.tick()
+        timeSinceLastEnemyShot += enemyShotDT
+
+        if timeSinceLastEnemyShot > timeBetweenEnemyShots and len(waveGenerator1.activeWaves) > 0:
+            # reset the timer
+            timeSinceLastEnemyShot = 0
+            # set a new random interval for the next bullet spawn
+            timeBetweenEnemyShots = random.randint(200,3000)
+
+            # get a random enemy from a random wave
+            targetWave = waveGenerator1.activeWaves[random.randint(0, len(waveGenerator1.activeWaves) - 1)]
+            if len(targetWave.enemyList) > 0:
+                targetEnemy = targetWave.enemyList[random.randint(0, len(targetWave.enemyList)-1)]
+                
+                # spawn a new bullet at the enemies location
+                enemyBulletList.append(Bullet(targetEnemy.hitbox.left+targetEnemy.hitbox.width,
+                                            targetEnemy.hitbox.bottom,
+                                            10,
+                                            10,
+                                            (255,0,0),
+                                            False))
+
+        # for testing DELETE ME
+        print("number of enemy bullets",len(enemyBulletList))
         
         # reset the background
         WINDOW.fill((0,0,0))

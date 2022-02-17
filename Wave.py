@@ -36,8 +36,8 @@ class Wave:
         # time object to regulate how many enemies have been spawned
         self.clock = pygame.time.Clock()
 
-        # amount of time since last enemy was spawned
-        self.timeSinceLastSpawn = 0
+        # amount of time since last enemy was spawned- starts large so it spawns an enemy immediatedly
+        self.timeSinceLastSpawn = 100000
 
     # enemy spawn function
     def spawn(self):

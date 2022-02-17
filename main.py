@@ -36,6 +36,9 @@ backgroundImg = pygame.image.load("Assets/Space-Background-Tiled.png")
 # scale the yellow ship image
 backgroundImg = pygame.transform.scale(backgroundImg, (WINDOW.get_width(),WINDOW.get_height()))
 
+# enemy image
+enemyImg = pygame.image.load("Assets/enemyBlack3.png")
+enemyImg = pygame.transform.scale(enemyImg, (50,50))
 
 # player laser
 playerLaserImg = pygame.image.load("Assets/laserBlue16.png")
@@ -182,6 +185,7 @@ def main():
         # reset the background
         WINDOW.fill((0,0,0))
 
+        # draw the background image so that it loops
         WINDOW.blit(backgroundImg, (0,int(backgroundImgY)))
         WINDOW.blit(backgroundImg, (0,int(backgroundImgY- HEIGHT)))
 
@@ -223,7 +227,7 @@ def main():
         # managing all the active waves
         for wave in waveGenerator1.activeWaves:
             wave.spawn()
-            wave.handleEnemies(WINDOW)
+            wave.handleEnemies(WINDOW, enemyImg)
 
         ### move and display every player bullet
         bulletsToKeep = []

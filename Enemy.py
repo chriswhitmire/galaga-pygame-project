@@ -69,6 +69,15 @@ class Enemy:
             aSurface (pygame surface object): surface to draw on
         """
         pygame.draw.rect(aSurface, self.color, self.hitbox, 1)
+
+    def display(self, aSurface, imageToDisplay):
+        """Displays the hitbox of the game object
+
+        Args:
+            aSurface (pygame surface object): surface to draw on
+            imageToDisplay (pygame image): image to show at the bullet's location
+        """
+        aSurface.blit(imageToDisplay, (self.hitbox.x, self.hitbox.y))
         
     
     

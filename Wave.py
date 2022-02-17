@@ -64,11 +64,12 @@ class Wave:
                 self.timeSinceLastSpawn = 0
 
     # handle enemies
-    def handleEnemies(self, aSurface) -> None:
+    def handleEnemies(self, aSurface, enemyImage) -> None:
         """draws all the enemies and moves them
 
         Args:
             aSurface (pygame Surface object): surface to draw on
+            enemyImage (pygame image): image to show at the bullet's location
         """
         # list storing the enemies to keep
         enemiesToKeep = []
@@ -76,9 +77,14 @@ class Wave:
         # for every enemy
         for enemy in self.enemyList:
             # render and move the enemy along the wavepoint system
+            
+            enemy.display(aSurface, enemyImage)
             enemy.renderHitbox(aSurface)
+
+            # move the enemy
             enemy.updatePos()
 
+            # if the enemy should still exist, then keep it
             if enemy.exists:
                 enemiesToKeep.append(enemy)
         

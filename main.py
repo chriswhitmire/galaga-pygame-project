@@ -32,9 +32,10 @@ pygame.display.set_caption("Galaga Pygame")
 
 #### Loading image assets
 # load the image for the background
-backgroundImg = pygame.image.load("Assets/space.png")
+backgroundImg = pygame.image.load("Assets/Space-Background-Tiled.png")
 # scale the yellow ship image
 backgroundImg = pygame.transform.scale(backgroundImg, (WINDOW.get_width(),WINDOW.get_height()))
+
 
 # player laser
 playerLaserImg = pygame.image.load("Assets/laserBlue16.png")
@@ -107,6 +108,9 @@ def main():
     # sound stuff
     backgroundMusic.play(-1)
 
+    # background image position
+    backgroundImgY = 0
+
     # game loop
     while isRunning:
         
@@ -177,6 +181,16 @@ def main():
 
         # reset the background
         WINDOW.fill((0,0,0))
+
+        WINDOW.blit(backgroundImg, (0,int(backgroundImgY)))
+        WINDOW.blit(backgroundImg, (0,int(backgroundImgY- HEIGHT)))
+
+        # update backgroundImgY value
+        backgroundImgY += 1
+
+        # reset it if it goes past the bottom of the window
+        if backgroundImgY > HEIGHT:
+            backgroundImgY = 0
         
         # for every enemy bullet, render it and check for collision
         enemyBulletsToKeep = []

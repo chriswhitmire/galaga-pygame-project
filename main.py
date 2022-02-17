@@ -138,7 +138,7 @@ def main():
         keysPressed = pygame.key.get_pressed()
 
         # if the 'w' key is pressed
-        if keysPressed[pygame.K_w] == True and PLAYER1.hitbox.top > PLAYER1.speed + PADDING:
+        if keysPressed[pygame.K_w] == True and PLAYER1.hitbox.top > HEIGHT/2 + PLAYER1.speed + PADDING:
             PLAYER1.moveUp()
 
         # if the 'a' key is pressed

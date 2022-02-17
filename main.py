@@ -149,16 +149,25 @@ def main():
                 # spawn a new bullet at the enemies location
                 enemyBulletList.append(Bullet(targetEnemy.hitbox.left+targetEnemy.hitbox.width,
                                             targetEnemy.hitbox.bottom,
-                                            10,
-                                            10,
+                                            3,
+                                            15,
                                             (255,0,0),
                                             False))
 
-        # for testing DELETE ME
-        print("number of enemy bullets",len(enemyBulletList))
-        
         # reset the background
         WINDOW.fill((0,0,0))
+        
+        # for every enemy bullet, render it and check for collision
+        enemyBulletsToKeep = []
+        for enemyBullet in enemyBulletList:
+            enemyBullet.display(WINDOW)
+            enemyBullet.move()
+            # if the enemy bullet is not past the bottom of the window, then keep it
+            if enemyBullet.hitbox.top < HEIGHT:
+                enemyBulletsToKeep.append(enemyBullet)
+
+        enemyBulletList = enemyBulletsToKeep
+        
         
         # display the player
         PLAYER1.display(WINDOW)

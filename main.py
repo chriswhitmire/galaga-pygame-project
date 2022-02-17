@@ -244,6 +244,7 @@ def main():
                     if enemy.hitbox.colliderect(bullet.hitbox):
                         # change the enemy's color to red
                         enemy.color = (255,0,0)
+                        enemy.exists = False
                 
             # only keep bullets that are still on the screen
             if bullet.hitbox.y > -10:

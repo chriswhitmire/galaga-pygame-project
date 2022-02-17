@@ -79,7 +79,7 @@ class Wave:
             # render and move the enemy along the wavepoint system
             
             enemy.display(aSurface, enemyImage)
-            enemy.renderHitbox(aSurface)
+            # enemy.renderHitbox(aSurface)
 
             # move the enemy
             enemy.updatePos()

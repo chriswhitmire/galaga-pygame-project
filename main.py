@@ -36,6 +36,14 @@ backgroundImg = pygame.image.load("Assets/space.png")
 # scale the yellow ship image
 backgroundImg = pygame.transform.scale(backgroundImg, (WINDOW.get_width(),WINDOW.get_height()))
 
+# sound stuff
+pygame.mixer.init()
+
+# load in sound files
+backgroundMusic = pygame.mixer.Sound("Assets/background.wav")
+enemyLaserSound = pygame.mixer.Sound("Assets/enemyLaser1.ogg")
+playerLaserSound = pygame.mixer.Sound("Assets/playerLaser.ogg")
+
 
 ############
 # Function definitions
@@ -92,6 +100,9 @@ def main():
     # enemy bullet vars
     enemyBulletList = []
 
+    # sound stuff
+    backgroundMusic.play(-1)
+
     # game loop
     while isRunning:
         
@@ -108,7 +119,10 @@ def main():
             # if spacebar is pressed, then add a bullet to the player's bullet list
             if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
+                        # spawn a new bullet at the player's location
                         playerBulletList.append(Bullet(PLAYER1.hitbox.x + PLAYER1.hitbox.width/2, PLAYER1.hitbox.y, 5, 20, (255,255,0), True))
+                        # play the player shoot sound
+                        playerLaserSound.play()
 
 
         ###### key presses
@@ -144,6 +158,9 @@ def main():
             # get a random enemy from a random wave
             targetWave = waveGenerator1.activeWaves[random.randint(0, len(waveGenerator1.activeWaves) - 1)]
             if len(targetWave.enemyList) > 0:
+                # play sound effect
+                enemyLaserSound.play()
+
                 targetEnemy = targetWave.enemyList[random.randint(0, len(targetWave.enemyList)-1)]
                 
                 # spawn a new bullet at the enemies location

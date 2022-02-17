@@ -74,6 +74,11 @@ class Player:
         """
         self.hitbox.y += self.speed
 
+    def loseHealth(self) -> None:
+        """subtracts the player's health by 1
+        """
+        self.health -= 1
+
 
 
     

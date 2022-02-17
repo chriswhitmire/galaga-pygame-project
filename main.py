@@ -162,12 +162,20 @@ def main():
         for enemyBullet in enemyBulletList:
             enemyBullet.display(WINDOW)
             enemyBullet.move()
-            # if the enemy bullet is not past the bottom of the window, then keep it
-            if enemyBullet.hitbox.top < HEIGHT:
+
+            # if the enemy bullet hits the player
+            if (enemyBullet.hitbox.colliderect(PLAYER1.hitbox)):
+                # subtract from the player's health
+                PLAYER1.loseHealth()
+
+            # if the enemy does not hit the player and
+            # if the enemy bullet is not past the bottom of the window,
+            # then keep it
+            elif enemyBullet.hitbox.top < HEIGHT:
                 enemyBulletsToKeep.append(enemyBullet)
 
         enemyBulletList = enemyBulletsToKeep
-        
+
         
         # display the player
         PLAYER1.display(WINDOW)

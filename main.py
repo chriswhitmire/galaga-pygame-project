@@ -51,6 +51,7 @@ pygame.mixer.init()
 backgroundMusic = pygame.mixer.Sound("Assets/background.wav")
 enemyLaserSound = pygame.mixer.Sound("Assets/enemyLaser1.ogg")
 playerLaserSound = pygame.mixer.Sound("Assets/playerLaser.ogg")
+enemyDieSound = pygame.mixer.Sound("Assets/hit.mp3")
 
 
 ############
@@ -245,6 +246,7 @@ def main():
                         # change the enemy's color to red
                         enemy.color = (255,0,0)
                         enemy.exists = False
+                        enemyDieSound.play()
                 
             # only keep bullets that are still on the screen
             if bullet.hitbox.y > -10:
